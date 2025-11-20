@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>卡密核验 · Token 收录</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="hero">
+    <div class="brand">卡密 · Token 收录后台</div>
+    <div class="tag">自助验证 · 自动收录 · 实时记录</div>
+  </header>
+
+  <main class="page">
+    <section class="notice">
+      <div class="notice-title">温馨提示</div>
+      <p>使用卡密前请先完成验证。验证成功后输入对应的 Token，后台会自动收录，方便后续管理与追踪。</p>
+      <p class="small">如遇问题，请联系我们的支持人员。卡密失效或被使用会有明确提示。</p>
+    </section>
+
+    <section class="panel">
+      <div class="steps">
+        <div class="step step-active">1 验证卡密</div>
+        <div class="step">2 录入 Token</div>
+        <div class="step">3 完成</div>
+      </div>
+
+      <form id="validate-form" class="card-form">
+        <label for="card-input">输入卡密</label>
+        <div class="input-row">
+          <input id="card-input" name="card" autocomplete="off" placeholder="输入您的卡密" required />
+          <button type="submit">验证卡密</button>
+        </div>
+        <p id="validate-hint" class="muted">验证成功后会显示第二步。</p>
+      </form>
+
+      <form id="token-form" class="card-form hidden">
+        <label for="token-input">录入 Token</label>
+        <textarea id="token-input" name="token" rows="3" placeholder="粘贴需要收录的 Token"></textarea>
+        <div class="input-row">
+          <button type="submit">提交并完成</button>
+        </div>
+        <p class="muted">Token 会与该卡密绑定，便于查找。</p>
+      </form>
+
+      <div id="result" class="result"></div>
+    </section>
+
+    <section class="panel secondary">
+      <div class="panel-header">
+        <div>
+          <div class="title">快速生成卡密</div>
+          <div class="subtitle">自发行卡密，用于内部发放或渠道销售</div>
+        </div>
+        <button id="refresh-cards" class="ghost">刷新列表</button>
+      </div>
+
+      <form id="issue-form" class="card-form inline">
+        <div class="inline-field">
+          <label for="issue-prefix">前缀</label>
+          <input id="issue-prefix" name="prefix" value="VIP" maxlength="10" />
+        </div>
+        <div class="inline-field">
+          <label for="issue-count">数量</label>
+          <input id="issue-count" name="count" type="number" min="1" max="100" value="3" />
+        </div>
+        <div class="inline-field">
+          <label for="issue-days">有效天数</label>
+          <input id="issue-days" name="valid_days" type="number" min="1" max="365" value="30" />
+        </div>
+        <button type="submit">生成卡密</button>
+      </form>
+
+      <div id="cards-list" class="cards-list"></div>
+    </section>
+  </main>
+
+  <script src="/static/main.js"></script>
+</body>
+</html>
